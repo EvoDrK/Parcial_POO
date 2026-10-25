@@ -107,7 +107,7 @@ class Arquero(Personaje):
         return max(0, self.ataque - objetivo.defensa) * 2
 
 
-class Combate:
+class Kombate:
     MAX_RONDAS = 30
 
     def __init__(self, personaje1, personaje2):
@@ -181,8 +181,12 @@ class Combate:
         self.mostrar_resultado()
 
 
+Combate = Kombate
+__all__ = ["Personaje", "Guerrero", "Mago", "Arquero", "Kombate", "Combate"]
+
+
 if __name__ == "__main__":
-    guerrero = Guerrero("Conan", 100, 20, 5)
-    mago = Mago("Merlin", 80, 25, 2)
-    combate = Combate(guerrero, mago)
-    combate.iniciar()
+    Kratos = Guerrero("Kratos", 100, 30, 20)
+    Arthur = Mago("Arthur", 80, 40, 10)
+    Kombate = Combate(Kratos, Arthur)
+    Kombate.iniciar()
