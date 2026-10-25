@@ -108,7 +108,7 @@ class Arquero(Personaje):
 
 
 class Kombate:
-    MAX_RONDAS = 30
+    MAX_RONDAS = 50
 
     def __init__(self, personaje1, personaje2):
         if not isinstance(personaje1, Personaje):
