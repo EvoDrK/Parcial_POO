@@ -1,120 +1,85 @@
 # Guardians of the Ancient Kingdom
 
-## 1- Descripción del proyecto
-Guardians of the Ancient Kingdom es un sistema de combate por turnos desarrollado en Python, que simula combates entre tres clases de guardianes del reino de Eldoria: Los Guerreros, Los Magos y Los Arqueros.
+## 1. Presentación del proyecto
 
-El proyecto resuleve la necesidad de automatizar los combates, donde cada personaje tiene atributos comunes como nombre, vida, ataque y defensa, pero cada tipo de personaje cuenta con una habilidad especial que modifica la forma en que realiza sus ataques, por ende, el sistema administra automanticamente los turnos, calcula el daño causado y actualiza la vida de los personajes y determina el resultado de la batalla, por lo tanto, se puede decir que el sistema toma control de forma segura las reglas que rigen el orden de los combates entre los personajes.
+*Guardians of the Ancient Kingdom* es una aplicación creada en Python que permite simular enfrentamientos por turnos entre tres tipos de personajes del reino de Eldoria: guerreros, magos y arqueros.
 
-## 2- Estructura del repositorio
+Cada combatiente posee características como nombre, puntos de vida, ataque y defensa. Sin embargo, cada clase dispone de una habilidad particular que influye en el daño que puede ocasionar. El programa se encarga de gestionar los turnos, calcular los ataques, modificar la vida de los participantes y establecer el desenlace de cada enfrentamiento.
 
-El proyecto está compuesto por tres archivos principales:
+## 2. Organización de los archivos
 
-**personajes.py:** Contiene toda la implementación del sistema, en esta encontraremos la clase base abstracta "Personaje" y las siguientes sub clases:
-- Personaje
-- Guerrero
-- Mago
-- Arquero
-- Combate
-Además de que contiene la lógica del combate, los métodos, las validaciones y las reglas de funcionamiento.
+El repositorio está formado por tres archivos:
 
-**main.py:** Es el archivo encargado de ejecutar el programa, en este archivo se crean los personajes, se realizan enfrentamientos y se ejecutan los casos de prueba solicitados para verificar el correcto funcionamiento del sistema.
+- **personajes.py:** Define las clases del sistema, sus atributos, las habilidades especiales, las validaciones y las reglas de combate.
+- **main.py:** Contiene el código principal para crear personajes, iniciar batallas y ejecutar diferentes pruebas.
+- **README.md:** Explica el funcionamiento del proyecto, su estructura y los principios de programación orientada a objetos utilizados.
 
-**README.md:** Este contiene la documentación del proyecto, explicando la organización del programa y la aplicación de los conceptos de Programación Orientada a Objetos.
+## 3. Descripción de las clases
 
-## 3- Clases 
+**Personaje:** Es la clase abstracta que establece los atributos y comportamientos básicos de los combatientes. Incluye el nombre, la vida, el ataque y la defensa, además de métodos para recibir daño, comprobar si continúa vivo y consultar su estado. También define `atacar()` como método abstracto.
 
-**Personaje:** Es la clase abstracta del sistema y representa las características comunes de todos los personajes, esta se encarga de almacenar los atributos de los personajes como:
-- Nombre
-- Vida
-- Ataque
-- Defensa
+**Guerrero:** Es un luchador especializado en ataques físicos. Su habilidad, denominada *Golpe Contundente*, incrementa el ataque en un 20 % antes de calcular el daño contra la defensa rival.
 
-Además, proporciona los metodos para recibir daño, verificar si el personaje sigue vivo y mostrar su estado actual, por otra parte, también incluye el método abstracto atacar(), que obliga a las clases hijas a implementar su propia forma de ataque.
+**Mago:** Utiliza ataques mágicos capaces de atravesar las defensas del oponente, por lo que el daño depende directamente de su poder de ataque.
 
-**Guerrero:** Representa a un guerrero que se especializa en combate fisico, este cuenta con una habilidad especial que es un Golpe Contundente, que aumenta su ataque en 20% antes de descontar la defensa del enemigo en gran medida.
+**Arquero:** Combate a distancia y puede realizar un disparo crítico que duplica el daño base cuando su ataque supera la defensa enemiga.
 
-**Mago:** Representa a un mago que se especializa en hechizos penetrantes, este cuenta con una habilidad especial que burla la defensa del contrincante.
+**Combate:** Administra el desarrollo de las batallas, alterna los turnos, ejecuta los ataques y determina si existe un vencedor, un empate o una condición para finalizar el enfrentamiento.
 
-**Arquero:** Representa a un personaje que se especializa en ataques a distancia tiene una habilidad especial que dispara un disparo critico que duplica el daño cuando su ataque supera la defensa del oponente.
+## 4. Vínculos entre las clases
 
-**Combate:** Es la clase que se encarga de administrar los combates entre los personajes, este controla:
-- Los turnos.
-- Los ataques.
-- La verificación del ganador.
-- Los empates.
-- La finalización del combate.
+- **Herencia:** Guerrero, Mago y Arquero derivan de Personaje, por lo que comparten sus características generales.
+- **Asociación:** Se presenta cuando un personaje interactúa con otro, como sucede al ejecutar un ataque contra un rival.
+- **Agregación:** La clase Combate utiliza personajes que fueron creados previamente. Estos pueden seguir existiendo independientemente de que la batalla haya terminado.
 
-## 4- Relaciones entre clases
+## 5. Principios de programación orientada a objetos
 
-**Herencia:** Esta se aplica porque los tres tipos de pesonajes, Guerreros, Magos y Arqueros son tipos especificos de personaje, por lo tanto, debido a esta relacion se reutilizan atributos y metodos sin necesidad de repetir el codigo
+**Abstracción:** La clase Personaje establece una estructura común sin definir los detalles particulares del ataque de cada clase.
 
-**Asociación:** Esta ocurre cuando un personaje interactua con otro durante un ataque, por ejemplo, que un personaje ataque a otro guerrero.atacar(mago).
+**Encapsulamiento:** Los atributos se administran mediante propiedades y métodos de acceso que permiten validar los valores antes de modificarlos.
 
-**Agregación:** Esta se utiliza en la clase combate, debido a que un combate recibe personajes ya creados previamente y una vez que estos esten en batalla y esta se de por finalizada, los personajes pueden reguir existiendo, por lo tanto, esta relacion corresponderia a una agregacion
+**Herencia:** Las clases especializadas aprovechan los atributos y métodos de Personaje, reduciendo la repetición de código.
 
-## 5- Conceptos de Programación Orientada a Objetos
+**Polimorfismo:** Cada tipo de combatiente implementa su propia versión del método `atacar()`, adaptándola a su habilidad especial.
 
-**Abstracción:** Esta se aplica mediante la clase abstracta Personaje, esta clase define las caracteriticas y comportamientos que deben tener todos los personajes sin especificar exactamente como atacan, delegando esta tarea a la subclases
+## 6. Funcionamiento del combate
 
-**Encapsulamiento:** se aplica en atributos y propiedades usando getter y setters, permitiendo que se controlen y validen los datos antes de modificarlos.
+Las batallas se desarrollan mediante una secuencia de turnos. En cada uno, el atacante ejecuta su habilidad, se calcula el daño, el rival pierde vida y se comprueba el estado de ambos participantes. El proceso continúa hasta que se cumpla una condición de finalización.
 
-**Herencia:** Se utiliza cuando las clases Guerrero, Mago y Arquero heredan de Personaje, gracias a esto se reutilizan características comunes y se evita la necesidad de duplicar partes del codigo.
+Las reglas de daño son las siguientes:
 
-**Polimorfismo:** Esta se aplica mediante el metodo atacar(), cada personaje implementa el metodo de modo diferente.
+- **Guerrero:** Daño = máximo entre 0 y (ataque × 1.20 − defensa).
+- **Mago:** Daño = ataque, sin descontar la defensa rival.
+- **Arquero:** El daño base corresponde a ataque − defensa. Si el ataque supera la defensa, el daño base se multiplica por dos.
 
-## 6- Lógica del combate y reglas del daño
+El combate puede terminar en empate si ambos personajes completan una ronda sin infligirse daño o si se alcanza el límite establecido de 50 rondas sin un ganador.
 
-El sistema desarrolla el combate por turnos, durante cada turno ocurre lo siguiente:
-1. Se identifica el atacante y el defensor.
-2. El atacante ejecuta su método atacar().
-3. Se calcula el daño correspondiente.
-4. El defensor recibe el daño mediante recibir_danio().
-5. Se actualiza la vida del defensor.
-6. Se muestra el estado de ambos participantes.
-7. Se verifica si existe un ganador.
+## 7. Cómo ejecutar el programa
 
-**Daño del Guerrero:** Daño = max(0, ataque × 1.20 − defensa)
+Para iniciar el proyecto, es necesario tener Python instalado.
 
-**Daño del Mago:** Daño = ataque (Ignora la defensa del enemigo).
-
-**Daño del Arquero:**
-Daño base = ataque − defensa
-Daño final = daño base × 2 (se aplica si supera la defensa del enemigo)
-
-**Empates:** El combate finaliza en empate cuando:
-- Ninguno de los personajes consigue causar daño durante una ronda completa.
-- Se alcanzan 50 rondas sin que exista un ganador.
-
-## 7- Ejecución
-
-Para ejecutar el proyecto se debe tener Python instalado en el equipo.
-
-Pasos para ejecutar el programa:
-
-1. Descargar o clonar el repositorio.
-2. Abrir una terminal en la carpeta del proyecto.
-3. Ejecutar el archivo principal:
+1. Descargar el repositorio o clonarlo.
+2. Abrir una terminal dentro de la carpeta del proyecto.
+3. Ejecutar el archivo principal con el siguiente comando:
 
 ```bash
 python mainP.py
 ```
 
-El programa ejecutará el combate principal y posteriormente mostrará todos los casos de prueba.
+Al iniciarse, el programa ejecuta el enfrentamiento principal y posteriormente realiza las pruebas definidas.
 
-## 8- Pruebas realizadas
+## 8. Verificación del sistema
 
-Se realizaron los siguientes casos de prueba:
+Se probaron diferentes situaciones para comprobar el comportamiento del programa, entre ellas:
 
-1. Creación correcta de los tres tipos de personajes.
-2. Rechazo de personajes con vida superior a 100 o negativa.
-3. Rechazo de nombres vacíos.
-4. Rechazo de ataques y defensas fuera de los rangos validos.
-5. Comprobación de la habilidad especial del Guerrero.
-6. Comprobación del ataque del Mago ignorando defensa.
-7. Comprobación del disparo crítico del Arquero.
-8. Verificación de que la vida nunca sea negativa.
-9. Verificación de que un personaje derrotado no pueda atacar.
-10. Ejecución completa de un combate e identificación del ganador.
-11. Comprobación del empate técnico cuando ninguno de los participantes puede causar daño.
+1. Instanciación de las tres clases de personajes.
+2. Validación de los puntos de vida y rechazo de valores no permitidos.
+3. Detección de nombres vacíos.
+4. Control de los límites de ataque y defensa.
+5. Funcionamiento de las habilidades especiales.
+6. Aplicación correcta del daño y actualización de la vida.
+7. Prevención de ataques por parte de personajes derrotados.
+8. Ejecución de combates y determinación de sus resultados.
+9. Comprobación de empates cuando no es posible causar daño.
 
-Los resultados obtenidos fueron los esperados, demostrando que las validaciones, habilidades especiales y reglas del combate funcionan correctamente.
+De acuerdo con las pruebas descritas, el sistema cumple con los comportamientos esperados para las validaciones, los ataques y la resolución de las batallas.
